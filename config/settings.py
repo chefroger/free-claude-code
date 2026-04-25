@@ -95,6 +95,10 @@ class Settings(BaseSettings):
     # ==================== DeepSeek Config ====================
     deepseek_api_key: str = Field(default="", validation_alias="DEEPSEEK_API_KEY")
 
+    # ==================== MiniMax Config ====================
+    minimax_api_key: str = Field(default="", validation_alias="MINIMAX_CN_API_KEY")
+    minimax_proxy: str = Field(default="", validation_alias="MINIMAX_PROXY")
+
     # ==================== Messaging Platform Selection ====================
     # Valid: "telegram" | "discord"
     messaging_platform: str = Field(
@@ -245,6 +249,7 @@ class Settings(BaseSettings):
             "deepseek",
             "lmstudio",
             "llamacpp",
+            "minimax",
         )
         if "/" not in v:
             raise ValueError(
@@ -256,7 +261,7 @@ class Settings(BaseSettings):
         if provider not in valid_providers:
             raise ValueError(
                 f"Invalid provider: '{provider}'. "
-                f"Supported: 'nvidia_nim', 'open_router', 'deepseek', 'lmstudio', 'llamacpp'"
+                f"Supported: 'nvidia_nim', 'open_router', 'deepseek', 'lmstudio', 'llamacpp', 'minimax'"
             )
         return v
 
